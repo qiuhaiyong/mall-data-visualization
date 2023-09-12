@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="./lib/echarts.min.js"></script>
+</head>
+
+<body>
+  <div class="box" style="width: 900px; height: 600px;"></div>
+  <script>
+    let mCharts = echarts.init(document.querySelector('.box'), null, {
+      width: 600,
+      height: 600
+    })
+    let xData = ['张三', '李四', '王五', '小明', '小红']
+    let yData = [45, 63, 75, 90, 35]
+    let option = {
+      title: {
+        text: "成绩展示",
+        textStyle: {
+          color: "skyblue"
+        },
+        borderWidth: 5,
+        borderColor: 'blue',
+        borderRadius: 5,
+        left: 300,
+        top: 10
+      },
+
+      tooltip: {
+        // trigger: 'item'
+        trigger: 'axis',
+        triggerOn: "mousemove",
+        // formatter: '{b}的{a}成绩是：{c}'
+        formatter: function (ticket, html) {
+          console.log(ticket);
+          console.log(html);
+          const str = ticket[0].axisValue + ticket[0].seriesName + ticket[0].value
+          return str
+        }
+      },
+
+      toolbox: {
+        feature: {
+          saveAsImage: {}
+        }
+      },
+
+      xAxis: {
+        type: 'category',
+        data: xData
+      },
+      yAxis: {
+        type: 'value'
+      },
+      series: [
+        {
+          name: '语文',
+          type: 'bar',
+          data: yData,
+
+          markPoint: {
+            data: [
+              {
+                name: '最大值',
+                type: 'max'
+              },
+              {
+                name: '最小值',
+                type: 'min'
+              }
+            ]
+          },
+
+          markLine: {
+            data: [
+              {
+                name: '平均线',
+                // 支持 'average', 'min', 'max'
+                type: 'average'
+              },
+
+            ]
+          },
+
+          label: {
+            show: true,
+            rotate: 60,
+            position: 'top'
+          },
+          barWidth: '30%'
+        }
+      ]
+
+    }
+    mCharts.setOption(option)
+  </script>
+</body>
+
+</html>

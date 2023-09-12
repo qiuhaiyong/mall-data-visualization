@@ -1,0 +1,51 @@
+<!--
+ * @Author: Yuk1ha
+ * @Date: 2023-09-12 20:40:54
+ * @LastEditors: Do not edit
+ * @LastEditTime: 2023-09-12 20:43:14
+ * @FilePath: \mall-data-visualization\echarts-learn\01-Echarts快速上手.html
+-->
+<!-- 
+  1：引入ecahrts.js文件
+  2：准备一个呈现图表的盒子
+  3：初始化echarts实例对象
+  4：准备配置项
+  5：将配置项设置给echarts实例对象
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="./lib/echarts.min.js"></script>
+</head>
+
+<body>
+  <div style="width: 600px; height: 600px;" class="box">
+  </div>
+  <script>
+    let mCharts = echarts.init(document.querySelector('.box'))
+    let option = {
+      xAxis: {
+        type: 'category',
+        data: ['小明', '小红', '小王']
+      },
+      yAxis: {
+        type: 'value'
+      },
+      series: [
+        {
+          name: '语文',
+          type: 'bar',
+          data: ['80', '90', '50']
+        }
+      ]
+    }
+
+    mCharts.setOption(option)
+  </script>
+</body>
+
+</html>
